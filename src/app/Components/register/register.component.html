@@ -1,0 +1,71 @@
+<div class="row">
+    <div class="col-lg-5 outerNameDiv">
+        <div class="name">
+            <!-- <h1>Twitter Application</h1> -->
+            <div>Returning User! Click Here to Login.</div>
+            <div><button class="button button2" (click)="switchToLogin()">Login</button></div>
+
+
+        </div>
+
+    </div>
+    <div class="col-lg-7">
+        <div class="registerDiv">
+            <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
+                <div class="form-group">
+                    <label>Username</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">@</div>
+                        </div>
+                        <input type="text" formControlName="username" class="form-control" placeholder="Please enter your username">
+                    </div>
+                    <div style="margin-top: 10px;">
+                        <div *ngIf="registerForm.get('username').status === 'PENDING'">
+                            Checking the availablity of username...
+                        </div>
+                        <div *ngIf="registerForm.get('username').status === 'VALID'" style="color: green; font-weight: 600;">
+                            Username is available!
+                        </div>
+
+                        <div *ngIf="registerForm.get('username').errors && registerForm.get('username').errors.usernameTaken" style="color: red; font-weight: 600;">
+                            Oh noes, this username is already taken!
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Name</label>
+                    <input type="text" formControlName="name" class="form-control" placeholder="Please enter your name">
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" formControlName="email" class="form-control" placeholder="Please enter your email">
+                    <div style="margin-top: 10px;">
+                        <div *ngIf="registerForm.get('email').status === 'PENDING'">
+                            Checking the availablity of username...
+                        </div>
+                        <div *ngIf="registerForm.get('email').status === 'VALID'" style="color: green; font-weight: 600;">
+                            Bingo! Email address is not registered!
+                        </div>
+
+                        <div *ngIf="registerForm.get('email').errors && registerForm.get('email').errors.emailTaken" style="color: red; font-weight: 600;">
+                            Oh noes, this email address is already registered!
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" formControlName="password" class="form-control" placeholder="Password">
+                    <small id="passwordHelpBlock" class="form-text text-muted">
+                        Your password must be 8-20 characters long witout spaces.
+                    </small>
+                </div>
+                <div class="form-group">
+                    <label>Confirm Password</label>
+                    <input type="password" formControlName="confirmPassword" class="form-control" placeholder="Re-enter your Password">
+                </div>
+                <button type="submit" [disabled]="!registerForm.valid" class="btn btn-primary registerbtn">Register</button>
+            </form>
+        </div>
+    </div>
+</div>

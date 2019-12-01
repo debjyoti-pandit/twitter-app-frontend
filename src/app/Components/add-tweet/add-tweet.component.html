@@ -1,0 +1,11 @@
+<div class="a">
+    <form [formGroup]="tweetForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <textarea class="form-control" formControlName="tweet" rows="3" id="comment" placeholder="What's happening today?" required></textarea>
+        </div>
+        <div class="b">
+            <button type="submit" [disabled]="!tweetForm.valid" class="btn tweetBtn">Tweet</button>
+        </div>
+    </form>
+    <hr>
+</div>

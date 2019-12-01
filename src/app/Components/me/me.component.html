@@ -1,0 +1,9 @@
+<div class="row">
+    <div class="col-md-4" *ngIf="personalData$ | async as me" style="text-align: center;">
+        <app-bio [bio]="me"></app-bio>
+    </div>
+    <div class="col-md-8">
+        <app-add-tweet></app-add-tweet>
+        <router-outlet></router-outlet>
+    </div>
+</div>

@@ -1,0 +1,25 @@
+.tweetView {
+    margin: 30px 0px;
+    padding: 20px;
+    border-style: solid;
+    border-radius: 20px;
+    border-width: 1px;
+}
+
+.owner {
+    margin-bottom: 5px;
+    font-family: cursive;
+    font-size: 13px;
+    color: grey;
+}
+
+.tweetSection {
+    font-family: 'Courier New', Courier, monospace
+}
+
+.od {
+    margin-bottom: 10px;
+    font-family: cursive;
+    font-size: 6px;
+    color: black
+}

@@ -1,0 +1,44 @@
+.searchbox {
+    margin: 50px;
+}
+
+.eachPeople {
+    padding: 20px;
+    border-style: solid;
+    border-radius: 20px;
+    border-width: 1px;
+    height: 140px;
+    width: 100%;
+    margin: 20px 0px;
+}
+
+.imgBox {
+    height: 100px;
+    width: 100px;
+    float: left;
+}
+
+.details {
+    width: calc(100% - 100px);
+    float: right;
+    height: 100px;
+    padding-left: 50px;
+}
+
+img {
+    height: 100px;
+    width: 100px;
+}
+
+.name {
+    font-size: 30px;
+    font-weight: 500;
+    color: #008CBA;
+    cursor: pointer;
+}
+
+.uname {
+    font-size: 20px;
+    font-weight: 500;
+    color: grey
+}

@@ -1,0 +1,4 @@
+<div *ngIf="tweets$ | async as tweets" style="margin: 50px;">
+    <app-tweet *ngFor="let tweet of tweets" [individualTweet]="tweet"></app-tweet>
+    <div *ngIf="tweets.length % 5 === 0 && finished && tweets.length != 0"><button (click)="loadMore()" class="btn button2 button">Load More</button></div>
+</div>

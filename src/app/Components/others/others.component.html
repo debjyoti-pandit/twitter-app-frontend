@@ -1,0 +1,10 @@
+<div class="row">
+    <div class="col-md-4" style="text-align: center;">
+        <app-bio [bio]="otherProfile[0]"></app-bio>
+    </div>
+    <div class="col-md-8">
+        <div style="margin-right: 50px;">
+            <app-tweet *ngFor="let tweet of otherProfile[1]" [individualTweet]="tweet"></app-tweet>
+        </div>
+    </div>
+</div>

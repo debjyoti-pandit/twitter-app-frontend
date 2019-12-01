@@ -1,0 +1,24 @@
+<div class="bio">
+    <div><img [src]="bio.avatarSet ? bio.imageUrl : 'https://www.w3schools.com/howto/img_avatar.png'" alt="" class="img-thumbnail rounded-circle"></div>
+    <div style="margin-top: 20px;">
+        <div class="a">@{{bio.username}}</div>
+        <div class="b"> {{bio.name}} </div>
+        <div *ngIf="bio.self" class="d"> {{bio.followersCount}} Followers</div>
+        <div *ngIf="bio.self" class="d"> {{bio.followingCount}} Following</div>
+        <div class="c">{{bio.email}}</div>
+        <div *ngIf="!bio.self" style="padding-top: 10px;">
+            <button class="btn button button2" (click)="followUser()">{{getName((show$ | async ))}}</button>
+        </div>
+    </div>
+</div>
+<!-- <div class="x">
+    <div class="input-group">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
+        </div>
+        <div class="custom-file">
+            <input #imageInput type="file" id="file" accept="image/*" aria-label="File browser example" (change)="processFile(imageInput)">
+            <label class="custom-file-label" for="inputGroupFile01"></label>
+        </div>
+    </div>
+</div> -->

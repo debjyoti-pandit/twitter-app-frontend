@@ -1,0 +1,14 @@
+<div class="searchbox">
+    <small id="emailHelp" class="form-text text-muted">Atleast type first 4 characters of the username to search
+        people.</small>
+    <input type="text" [formControl]="queryField" class="form-control form-control-lg" placeholder="Enter your search username here" autofocus>
+</div>
+<div *ngIf="change$ | async as userData" style="margin: 50px;">
+    <div class="eachPeople" *ngFor="let user of userData">
+        <div class="imgBox"><img [src]="user.avatarSet ? user.imageUrl : 'https://www.w3schools.com/howto/img_avatar.png'" alt="profile pic" class="img-thumbnail rounded-circle" height="100px" width="100px"></div>
+        <div class="details">
+            <div class="name" (click)="slectUser(user._id)">{{changeCase(user.name)}}</div>
+            <div class="uname">@{{user.username}}</div>
+        </div>
+    </div>
+</div>

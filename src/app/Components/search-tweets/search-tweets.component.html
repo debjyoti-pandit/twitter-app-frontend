@@ -1,0 +1,7 @@
+<div class="searchbox">
+    <small class="form-text text-muted">Atleast type 4 characters of the tweet or start with # to search via hastag to search.</small>
+    <input type="text" [formControl]="queryField" class="form-control form-control-lg" placeholder="Enter your search query here" autofocus>
+</div>
+<div *ngIf="change$ | async as tweets" style="margin: 50px;">
+    <app-tweet *ngFor="let tweet of tweets" [individualTweet]="tweet"></app-tweet>
+</div>

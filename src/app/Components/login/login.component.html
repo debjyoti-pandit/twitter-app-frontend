@@ -1,0 +1,37 @@
+<div class="row" style="margin-top: 50px;">
+    <div class="col-lg-5 outerNameDiv">
+        <div class="name">
+            <!-- <h1>Twitter Application</h1> -->
+            <div>New User! Click Here to Join Us.</div>
+            <div><button class="button button2" (click)="switchToRegister()"> Join US!</button></div>
+
+
+        </div>
+
+    </div>
+    <div class="col-lg-7">
+        <div class="loginDiv">
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                    <label>Username</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">@</div>
+                        </div>
+                        <input type="text" formControlName="username" pattern="[A-Za-z0-9]{7,}" class="form-control form-control-lg" placeholder="Please enter your username" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" formControlName="password" class="form-control form-control-lg" placeholder="Password" required>
+                </div>
+                <!-- <div class="form-group form-check">
+                    <input type="checkbox" formControlName="saveCred" class="form-check-input">
+                    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                </div> -->
+                <div *ngIf="loginError" class="loginErrorMessage">Incorrect Username and Password</div>
+                <button type="submit" [disabled]="!loginForm.valid" class="btn btn-primary loginbtn">Login</button>
+            </form>
+        </div>
+    </div>
+</div>
