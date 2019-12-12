@@ -1,8 +1,9 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input, NgZone, AfterViewInit } from '@angular/core';
 import { HttpService } from 'src/app/services/http.service';
 import { PersonalData } from 'src/app/models/personalData';
-import { Subject, BehaviorSubject } from 'rxjs';
-import { async } from 'q';
+import { BehaviorSubject } from 'rxjs';
+import { FormControl } from '@angular/forms';
+import { ViewChild, ElementRef} from '@angular/core';
 
 @Component({
   selector: 'app-bio',
@@ -14,10 +15,20 @@ export class BioComponent implements OnInit {
 
   @Input() bio: PersonalData
 
+  @ViewChild('closeAddExpenseModal', { static : true }) closeAddExpenseModal: ElementRef;
+
   private subject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true)
   show$ = this.subject.asObservable()
 
-  selectedFile: ImageSnippet;
+
+  private subjectUpload: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false)
+  showUpload$ = this.subjectUpload.asObservable()
+
+  fileData: File = null;
+  previewUrl: any = null;
+  fileSelected: boolean = false
+
+  imageUpload = new FormControl('');
 
   constructor(private httpService: HttpService, private ngZone: NgZone) { }
 
@@ -46,29 +57,37 @@ export class BioComponent implements OnInit {
     return 'FOLLOW'
   }
 
-  //here
+  fileProgress(fileInput: any) {
+    this.fileData = <File>fileInput.target.files[0];
+    this.preview();
+  }
 
-  // async processFile(imageInput: any) {
-  //   const file: File = imageInput.files[0];
-  //   const reader = new FileReader();
-  //   try {
-  //     reader.addEventListener('load', async (event: any) => {
-  //       this.selectedFile = new ImageSnippet(event.target.result, file);
-  //       await this.httpService.uploadImage(this.selectedFile.file)
-  //       alert('Image Successfully Uploaded!. Please refresh the view to get it reflected.')
-  //     });
-  //     reader.readAsDataURL(file);
-  //   } catch (error) {
-  //     // console.log(error)
-  //     alert('Image Upload failed. Try uploading below 1 MB size.')
-  //   }
-  // }
-}
+  preview() {
+    var mimeType = this.fileData.type;
+    if (mimeType.match(/image\/*/) == null) {
+      return;
+    }
 
+    var reader = new FileReader();
+    reader.readAsDataURL(this.fileData);
+    reader.onload = (_event) => {
+      this.previewUrl = reader.result;
+      this.subjectUpload.next(true)
+      this.fileSelected = true
+    }
+  }
 
-class ImageSnippet {
-  pending: boolean = false;
-  status: string = 'init';
-
-  constructor(public src: string, public file: File) { }
+  async onSubmit(fileInput) {
+    try {
+      await this.httpService.uploadImage(this.fileData)
+      this.previewUrl = null
+      this.subjectUpload.next(false)
+      fileInput.value = ""
+      this.closeAddExpenseModal.nativeElement.click();
+      alert('Successfully, uploaded your profile picture !! Please refresh, to get it reflected.');
+    } catch (e) {
+      alert("Please upload a file less than 1 MB!")
+      this.fileSelected = false
+    }
+  }
 }

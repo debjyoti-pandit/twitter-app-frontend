@@ -62,3 +62,7 @@ p {
     width: 350px;
     margin: auto;
 }
+
+input {
+    cursor: pointer;
+}

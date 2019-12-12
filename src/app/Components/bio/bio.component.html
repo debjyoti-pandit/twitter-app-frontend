@@ -11,14 +11,33 @@
         </div>
     </div>
 </div>
-<!-- <div class="x">
-    <div class="input-group">
-        <div class="input-group-prepend">
-            <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
-        </div>
-        <div class="custom-file">
-            <input #imageInput type="file" id="file" accept="image/*" aria-label="File browser example" (change)="processFile(imageInput)">
-            <label class="custom-file-label" for="inputGroupFile01"></label>
+<div class="x">
+    <button type="button" class="btn button button2" style="width: 250px;" data-toggle="modal" data-target="#exampleModal">
+        Change Profile Picture
+    </button>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Please select your profile picture.</h5>
+                <button type="button" #closeAddExpenseModal class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <input type="file" name="image" #fileInput (change)="fileProgress($event)" [formControl]="imageUpload" />
+                </div>
+                <div *ngIf="showUpload$ | async as a">
+                    <img [src]="previewUrl" class="img-thumbnail rounded-circle" />
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" [disabled]="!fileSelected" (click)="onSubmit(fileInput)">Save changes</button>
+            </div>
         </div>
     </div>
-</div> -->
+</div>
